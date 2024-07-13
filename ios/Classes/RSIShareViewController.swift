@@ -182,10 +182,11 @@ open class RSIShareViewController: SLComposeServiceViewController {
     
     
     // Save shared media and redirect to host app
-    private func saveAndRedirect(message: String? = nil) {
+    public func saveAndRedirect(message: String? = nil, title: String? = nil) {
         let userDefaults = UserDefaults(suiteName: appGroupId)
         userDefaults?.set(toData(data: sharedMedia), forKey: kUserDefaultsKey)
         userDefaults?.set(message, forKey: kUserDefaultsMessageKey)
+        userDefaults?.set(title, forKey: kUserDefaultsTitleKey)
         userDefaults?.synchronize()
         redirectToHostApp()
     }
