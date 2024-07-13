@@ -115,6 +115,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
         let userDefaults = UserDefaults(suiteName: appGroupId ?? defaultGroupId)
         
         let message = userDefaults?.string(forKey: kUserDefaultsMessageKey)
+        let title = userDefaults?.string(forKey: kUserDefaultsTitleKey)
         if let json = userDefaults?.object(forKey: kUserDefaultsKey) as? Data {
             let sharedArray = decode(data: json)
             let sharedMediaFiles: [SharedMediaFile] = sharedArray.compactMap {
@@ -129,6 +130,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
                     thumbnail: getAbsolutePath(for: $0.thumbnail),
                     duration: $0.duration,
                     message: message,
+                    title: title
                     type: $0.type
                 )
             }
@@ -209,6 +211,7 @@ public class SharedMediaFile: Codable {
     var thumbnail: String? // video thumbnail
     var duration: Double? // video duration in milliseconds
     var message: String? // post message
+    var title: String? // post title
     var type: SharedMediaType
     
     
@@ -218,12 +221,14 @@ public class SharedMediaFile: Codable {
         thumbnail: String? = nil,
         duration: Double? = nil,
         message: String?=nil,
+        title: String?=nil,
         type: SharedMediaType) {
             self.path = path
             self.mimeType = mimeType
             self.thumbnail = thumbnail
             self.duration = duration
             self.message = message
+            self.title = title
             self.type = type
         }
 }
