@@ -131,7 +131,7 @@ public class SwiftReceiveSharingIntentPlugin: NSObject, FlutterPlugin, FlutterSt
                     thumbnail: getAbsolutePath(for: $0.thumbnail),
                     duration: $0.duration,
                     message: message,
-                    title: title
+                    title: title,
                     type: $0.type
                 )
             }
